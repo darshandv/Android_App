@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1025215073586",
+    "firebase_url": "https://sipfirebaseproject.firebaseio.com",
+    "project_id": "sipfirebaseproject",
+    "storage_bucket": "sipfirebaseproject.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1025215073586:android:701b25b039d8bbdb",
+        "android_client_info": {
+          "package_name": "com.myapp.darshan.sip"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1025215073586-noibucd8svgf6l73431c0bnvvbqg11eo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.myapp.darshan.sip",
+            "certificate_hash": "9c81b9119dc32a5822373f56b5448c2626fc7691"
+          }
+        },
+        {
+          "client_id": "1025215073586-66bvg10gmoer2pib6egtu5k2phn3m7u9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKpPQAZ6dWMs2tphp4rywNFW9rTxJjGro"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1025215073586-66bvg10gmoer2pib6egtu5k2phn3m7u9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
