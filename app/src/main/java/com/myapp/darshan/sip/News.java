@@ -10,9 +10,11 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +27,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.IgnoreExtraProperties;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import com.myapp.darshan.sip.MessageData;
@@ -61,11 +64,13 @@ public class News extends Fragment {
 //    }
 
     EditText text;
-    ScrollView scroll;
+    ListView listView;
+
     String admin = "admin";
     Button sendButton;
     static int id=1;
     private DatabaseReference mDatabase;
+    ArrayList<String> listitems=new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -78,9 +83,10 @@ public class News extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mDatabase = FirebaseDatabase.getInstance().getReference().child("NEWS");
+        listView = (ListView) view.findViewById(R.id.list_view);
+
         text = (EditText)view.findViewById(R.id.editMessage);
         sendButton =(Button) view.findViewById(R.id.buttonSend);
-
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,32 +100,26 @@ public class News extends Fragment {
                 }
             }
         });
-
-        mDatabase.child("NEWS").addValueEventListener(new ValueEventListener() {
+        mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-
+                //LinearLayout layout = (LinearLayout) findViewById(R.id.info);
+//                LinearLayout layout = new LinearLayout(getActivity());
+//                layout.setBackgroundColor(getResources().getColor(R.color.viewBackground));
                 MessageData message = dataSnapshot.getValue(MessageData.class);
-
-                if (message==null || message.body.equals("")){
-                    Log.e("Null", "Null");
+                if (message==null){
+                    Toast.makeText(getContext(), "Null Message detected :"+message.body, Toast.LENGTH_SHORT).show();
                     return;
                 }
-                Log.d("Message", "Message Received");
-                //LinearLayout layout = (LinearLayout) findViewById(R.id.info);
-                LinearLayout layout = new LinearLayout(getActivity());
-                layout.setBackgroundColor(getResources().getColor(R.color.viewBackground));
+//
+//                listitems.add(message.body);
+//                ArrayAdapter<String> arrayAdapter= new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1,listitems);
+//                listView.setAdapter(arrayAdapter);
 
-                TextView receivedMessage = new TextView(getActivity());
-                receivedMessage.setText( message.body);
-                receivedMessage.setId(id++);
-                receivedMessage.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT));
-                receivedMessage.setTextColor(getResources().getColor(R.color.colorBlack));
 
-                ((LinearLayout) layout).addView(receivedMessage);
-//                List notes = new ArrayList<>();
+//                arrayAdapter.add(message.body);
+//                arrayAdapter.notifyDataSetChanged();
 //                for (DataSnapshot noteDataSnapshot : dataSnapshot.getChildren()) {
 //                    Note note = noteDataSnapshot.getValue(Note.class);
 //                    notes.add(note);
