@@ -93,7 +93,7 @@ public class News extends Fragment {
                 String data = text.getText().toString();
                 if(!data.equals("")) {
                     MessageData datamap = new MessageData(data);
-                    mDatabase.push().setValue(datamap.toMap());
+                    mDatabase.push().setValue(data);
                     if (text.length() > 0) {
                         text.getText().clear();
                     }
@@ -107,15 +107,22 @@ public class News extends Fragment {
                 //LinearLayout layout = (LinearLayout) findViewById(R.id.info);
 //                LinearLayout layout = new LinearLayout(getActivity());
 //                layout.setBackgroundColor(getResources().getColor(R.color.viewBackground));
-                MessageData message = dataSnapshot.getValue(MessageData.class);
-                if (message==null){
-                    Toast.makeText(getContext(), "Null Message detected :"+message.body, Toast.LENGTH_SHORT).show();
-                    return;
-                }
+//                MessageData message = dataSnapshot.getValue(MessageData.class);
+                listitems.clear();
+                for (DataSnapshot messageSnapshot : dataSnapshot.getChildren()){
+                    String message = messageSnapshot.getValue(String.class);
+                    if (message==null ){
+                        Toast.makeText(getContext(), "Null Message detected :", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
 //
-//                listitems.add(message.body);
-//                ArrayAdapter<String> arrayAdapter= new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1,listitems);
-//                listView.setAdapter(arrayAdapter);
+                    listitems.add(message);
+
+                }
+                ArrayAdapter<String> arrayAdapter= new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1,listitems);
+                listView.setAdapter(arrayAdapter);
+                arrayAdapter.notifyDataSetChanged();
+                Toast.makeText(getContext(), "Message detected : ", Toast.LENGTH_SHORT).show();
 
 
 //                arrayAdapter.add(message.body);
@@ -125,7 +132,7 @@ public class News extends Fragment {
 //                    notes.add(note);
 //                }
 //                adapter.updateList(notes);
-                Toast.makeText(getContext(), "Message detected :"+message.body, Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
