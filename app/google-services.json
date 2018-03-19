@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1025215073586-mof2n32s3j5r90o4oags2oofu9bprfol.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.myapp.darshan.sip",
+            "certificate_hash": "61b63e3f4ac896a7c40d06044b0c3ca2c3db3a25"
+          }
+        },
+        {
           "client_id": "1025215073586-noibucd8svgf6l73431c0bnvvbqg11eo.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

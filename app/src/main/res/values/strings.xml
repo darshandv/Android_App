@@ -9,4 +9,10 @@
     <string name="tab_text_3">Tab 3</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
+    <string name="DC">CO250\nData\n Communications </string>
+    <string name="SE">CO251\nSoftware\nEngineering</string>
+    <string name="OS">CO252\nOperating System</string>
+    <string name="DAA">CO253\nDesign and Analysis of\nAlgorithms</string>
+    <string name="SP">CO262\n   System Programming   </string>
+    <string name="OOP">CO263\nObject\nOriented\nProgramming</string>
 </resources>
