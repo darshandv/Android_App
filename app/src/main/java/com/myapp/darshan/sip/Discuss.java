@@ -32,10 +32,6 @@ public class Discuss extends Fragment {
 //    private RecyclerView.LayoutManager mLayoutManager;
     private CardView c;
 
-    String[] subject = {
-            "DC", "SE", "OS", "DAA", "SP", "OOP"
-    };
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

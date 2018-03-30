@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.myapp.darshan.sip.DCforum"
-            android:label="DCforum"></activity>
+            android:label="DC Forum"></activity>
     </application>
 
 </manifest>
