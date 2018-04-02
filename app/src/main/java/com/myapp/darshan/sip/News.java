@@ -158,7 +158,62 @@ public class News extends Fragment {
 //    }
 //
 //    public class Post{
-//        public String author;
+//        publiesult.put("body", body);
+//
+//            return result;
+//        }
+//
+//    }
+//
+//
+//
+//    private DatabaseReference mDatabase;
+//
+//    private EditText message;
+//    private Button send;
+//
+//    @Override
+//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+//                             Bundle savedInstanceState) {
+//        mDatabase = FirebaseDatabase.getInstance().getReference().child("News");
+//
+//        message = (EditText)container.findViewById(R.id.editMessage);
+//        send = (Button)container.findViewById(R.id.buttonSend);
+//        send.setOnClickListener(new View.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(View v) {
+//                                        final String data = message.getText().toString();
+//                                        final User user = new User("Admin");
+//                                    }
+//                                });
+////                mDatabase.child("News").addListenerForSingleValueEvent(
+////                        new ValueEventListener() {
+////                            @Override
+////                            public void onDataChange(DataSnapshot dataSnapshot) {
+////                                // Get user value
+////
+////                                // Write new post
+////                                writeNewPost(user.username, data);
+////
+////
+////                                // Finish this Activity, back to the stream
+////                                setEditingEnabled(true);
+////                                // [END_EXCLUDE]
+////                            }
+////
+////                            @Override
+////                            public void onCancelled(DatabaseError databaseError) {
+////                                Log.w(TAG, "getUser:onCancelled", databaseError.toException());
+////                                // [START_EXCLUDE]
+////                                setEditingEnabled(true);
+////                                // [END_EXCLUDE]
+////                            }
+////
+////                        });
+////
+////            }
+////
+////          c String author;
 //        public String body;
 //        public int starCount = 0;
 //        public Map<String, Boolean> stars = new HashMap<>();
