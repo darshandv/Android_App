@@ -77,7 +77,7 @@ public class DCforum extends AppCompatActivity{
             public void onDataChange(DataSnapshot dataSnapshot) {
 
 
-                //arrayList.clear();
+                listitems.clear();
                 for (DataSnapshot messageSnapshot : dataSnapshot.getChildren()) {
                     //String message = messageSnapshot.getValue(String.class);
                     ChatMessage model = messageSnapshot.getValue(ChatMessage.class);
