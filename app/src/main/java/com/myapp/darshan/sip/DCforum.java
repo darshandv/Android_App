@@ -30,7 +30,7 @@ import java.util.ArrayList;
 public class DCforum extends AppCompatActivity{
 
     public FirebaseListAdapter<ChatMessage> adapter;
-    ArrayList<String> listitems =new ArrayList<>();
+    ArrayList<ChatMessage> listitems =new ArrayList<>();
     DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("DCforum");
     ListView listOfMessages;
 
@@ -44,9 +44,9 @@ public class DCforum extends AppCompatActivity{
 
         //listOfMessages = (ListView)findViewById(R.id.list_of_messages);
 
-        messageText = (TextView)findViewById(R.id.message_text);
+        /*messageText = (TextView)findViewById(R.id.message_text);
         messageUser = (TextView)findViewById(R.id.message_user);
-        messageTime = (TextView)findViewById(R.id.message_time);
+        messageTime = (TextView)findViewById(R.id.message_time);*/
         listOfMessages = (ListView)findViewById(R.id.list_of_messages);
 
         FloatingActionButton fab =
@@ -59,10 +59,10 @@ public class DCforum extends AppCompatActivity{
 
 
                 FirebaseDatabase.getInstance().getReference().child("DCforum").push()
-                        .setValue(input.getText().toString()
+                        .setValue(new ChatMessage(input.getText().toString()
                                 /*FirebaseAuth.getInstance()
                                         .getCurrentUser()
-                                        .getDisplayName()*/
+                                        .getDisplayName()*/, "Darshan")
                         );
 
                 // Clear the input
@@ -72,88 +72,88 @@ public class DCforum extends AppCompatActivity{
 
 
 
-//        mDatabase.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//
-//
-//                //arrayList.clear();
-//                for (DataSnapshot messageSnapshot : dataSnapshot.getChildren()) {
-//                    //String message = messageSnapshot.getValue(String.class);
-//                    ChatMessage model = messageSnapshot.getValue(ChatMessage.class);
-//                    Log.e("Check", model.getMessageText());
-//                    messageText.setText(model.getMessageText());
-//                    messageUser.setText(model.getMessageUser());
-//                    messageTime.setText(DateFormat.format("dd-MM-yyyy (HH:mm:ss)",
-//                            model.getMessageTime()));
-////                    if (model==null ){
-////                        Toast.makeText(getApplicationContext(), "Null Message detected :", Toast.LENGTH_SHORT).show();
-////                        return;
-////                    }
-////
-//                    arrayList.add(model);
-//
-//                }
-//                ArrayAdapter<ChatMessage> arrayAdapter = new ArrayAdapter<ChatMessage>(getApplicationContext(), R.layout.message, arrayList);
-//                listOfMessages.setAdapter(arrayAdapter);
-//            }
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                listOfMessages = (ListView)findViewById(R.id.list_of_messages);
-//                Query query = FirebaseDatabase.getInstance().getReference().child("DCForum");
-//
-//                FirebaseListOptions<ChatMessage> options =
-//                        new FirebaseListOptions.Builder<ChatMessage>()
-//                                .setQuery(query, ChatMessage.class)
-//                                .setLayout(android.R.layout.simple_list_item_1)
-//                                .build();
-//                adapter = new FirebaseListAdapter<ChatMessage>(options) {
-//                    @Override
-//                    protected void populateView(View v, ChatMessage model, int position) {
-//                        TextView messageText = (TextView)v.findViewById(R.id.message_text);
-//                        TextView messageUser = (TextView)v.findViewById(R.id.message_user);
-//                        TextView messageTime = (TextView)v.findViewById(R.id.message_time);
-//
-//                        // Set their text
-//                        messageText.setText(model.getMessageText());
-//                        messageUser.setText(model.getMessageUser());
-//                        Log.e("Received", model.getMessageText());
-//
-//                        // Format the date before showing it
-//                        messageTime.setText(DateFormat.format("dd-MM-yyyy (HH:mm:ss)",
-//                                model.getMessageTime()));
-//                    }
-//                };
-//                listOfMessages.setAdapter(adapter);
-                listitems.clear();
-                for (DataSnapshot messageSnapshot : dataSnapshot.getChildren()){
-                    String message = messageSnapshot.getValue(String.class);
-                    if (message==null ){
-                        Toast.makeText(getApplicationContext(), "Null Message detected :", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                    Log.d("Check",message);
-                    listitems.add(message.toString());
 
+
+                //arrayList.clear();
+                for (DataSnapshot messageSnapshot : dataSnapshot.getChildren()) {
+                    //String message = messageSnapshot.getValue(String.class);
+                    ChatMessage model = messageSnapshot.getValue(ChatMessage.class);
+                    Log.e("Check", model.getMessageText());
+                    /*messageText.setText(model.getMessageText());
+                    messageUser.setText(model.getMessageUser());
+                    messageTime.setText(DateFormat.format("dd-MM-yyyy (HH:mm:ss)",
+                            model.getMessageTime()));*/
+//                    if (model==null ){
+//                        Toast.makeText(getApplicationContext(), "Null Message detected :", Toast.LENGTH_SHORT).show();
+//                        return;
+//                    }
+//
+                    listitems.add(model);
 
                 }
-                ArrayAdapter<String> arrayAdapter= new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1,listitems);
+                Adapter arrayAdapter=new Adapter(getApplicationContext(),listitems);
                 listOfMessages.setAdapter(arrayAdapter);
-                arrayAdapter.notifyDataSetChanged();
-                Toast.makeText(getApplicationContext(), "Message detected : ", Toast.LENGTH_SHORT).show();
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(getApplicationContext(), "Message cancelled", Toast.LENGTH_SHORT).show();
+
             }
         });
+//        mDatabase.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                listOfMessages = (ListView)findViewById(R.id.list_of_messages);
+////                Query query = FirebaseDatabase.getInstance().getReference().child("DCForum");
+////
+////                FirebaseListOptions<ChatMessage> options =
+////                        new FirebaseListOptions.Builder<ChatMessage>()
+////                                .setQuery(query, ChatMessage.class)
+////                                .setLayout(android.R.layout.simple_list_item_1)
+////                                .build();
+////                adapter = new FirebaseListAdapter<ChatMessage>(options) {
+////                    @Override
+////                    protected void populateView(View v, ChatMessage model, int position) {
+////                        TextView messageText = (TextView)v.findViewById(R.id.message_text);
+////                        TextView messageUser = (TextView)v.findViewById(R.id.message_user);
+////                        TextView messageTime = (TextView)v.findViewById(R.id.message_time);
+////
+////                        // Set their text
+////                        messageText.setText(model.getMessageText());
+////                        messageUser.setText(model.getMessageUser());
+////                        Log.e("Received", model.getMessageText());
+////
+////                        // Format the date before showing it
+////                        messageTime.setText(DateFormat.format("dd-MM-yyyy (HH:mm:ss)",
+////                                model.getMessageTime()));
+////                    }
+////                };
+////                listOfMessages.setAdapter(adapter);
+//                listitems.clear();
+//                for (DataSnapshot messageSnapshot : dataSnapshot.getChildren()){
+//                    String message = messageSnapshot.getValue(String.class);
+//                    if (message==null ){
+//                        Toast.makeText(getApplicationContext(), "Null Message detected :", Toast.LENGTH_SHORT).show();
+//                        return;
+//                    }
+//                    Log.d("Check",message);
+//                    listitems.add(message.toString());
+//
+//
+//                }
+//                ArrayAdapter<String> arrayAdapter= new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1,listitems);
+//                listOfMessages.setAdapter(arrayAdapter);
+//                arrayAdapter.notifyDataSetChanged();
+//                Toast.makeText(getApplicationContext(), "Message detected : ", Toast.LENGTH_SHORT).show();
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//                Toast.makeText(getApplicationContext(), "Message cancelled", Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
     }
 }
